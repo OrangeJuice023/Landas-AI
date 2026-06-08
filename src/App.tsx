@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FitScoreRing, SalaryBand, CareerTimeline, MarketTags } from "./components/CareerVisuals";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, Map, Compass, Briefcase, Zap, Star, Layout, Database, BookOpen, Layers } from "lucide-react";
 import type { CareerRecommendation, Recommendation } from "./types/career";
