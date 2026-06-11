@@ -3,7 +3,7 @@ import { FitScoreRing, SalaryBand, CareerTimeline, MarketTags } from "./componen
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, Map, Compass, Briefcase, Zap, Star, Layout, Database, BookOpen, Layers } from "lucide-react";
 import type { CareerRecommendation, Recommendation } from "./types/career";
-import { fetchCareerAdvice, type DetailedSearchParams } from "./api/openrouter";
+import { fetchCareerAdvice, type DetailedSearchParams } from "./api/aiClient";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { technologyDepartments, healthcareDepartments, financeDepartments, logisticsDepartments, manufacturingDepartments, constructionDepartments, foodBeverageDepartments, retailDepartments, energyDepartments, mediaDepartments, governmentDepartments, fallbackDepartments, type Department } from "./data/industryData";
