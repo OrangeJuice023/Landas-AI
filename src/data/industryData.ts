@@ -868,3 +868,188 @@ export const financeDepartments: Department[] = [
     ]
   }
 ];
+
+// ============================================================
+// AGRICULTURE, FISHERIES & FORESTRY
+// PSA April 2026: ~19% of all PH employment (~8.2M agri + 1.25M fishing)
+// ============================================================
+export const agricultureDepartments: Department[] = [
+  {
+    name: "Agribusiness and Farm Management",
+    subtitle: "The Cultivators",
+    description: "The backbone of the Philippine food supply. This department manages crop production, farm operations, and the business side of agriculture — from smallholder cooperatives to large agribusiness corporations.",
+    teams: [
+      {
+        name: "Farm Operations Manager",
+        desc: "Oversees day-to-day farm operations, crop scheduling, labor, and yield optimization for plantations and commercial farms.",
+        typical_employers: ["Dole Philippines", "Del Monte Philippines", "Sumifru", "La Frutera", "AgriNurture Inc."],
+        work_setup: "On-site / Field-based",
+        education: "BS Agriculture, Agribusiness, or Agricultural Engineering. PRC Agriculturist license an advantage.",
+        pathway: "Gain OJT on commercial farms or cooperatives, then apply via agribusiness career pages and JobStreet.",
+        progression: ["Farm Supervisor", "Farm Operations Manager", "Estate Manager", "Plantation Head", "Operations Director"],
+        salary: { entry: "₱18,000 – ₱28,000", mid: "₱35,000 – ₱60,000" },
+        key_skills: {
+          hard: ["Crop management", "GAP (Good Agricultural Practices)", "Irrigation systems", "Farm record-keeping", "Pest management"],
+          soft: ["Leadership", "Problem-solving", "Resourcefulness", "Decision-making"]
+        },
+        market_tags: { in_demand: true, remote_friendly: false, fresh_grad_friendly: true }
+      },
+      {
+        name: "Agriculturist / Agronomist",
+        desc: "Provides technical expertise on soil, crops, and yields. Works with farmers, LGUs, and agribusiness to improve productivity sustainably.",
+        typical_employers: ["Department of Agriculture", "East-West Seed", "Yara Philippines", "SL Agritech", "LGU Agriculture Offices"],
+        work_setup: "Field-based / On-site",
+        education: "BS Agriculture (major in Agronomy/Crop Science) + PRC Agriculturist Licensure Exam.",
+        pathway: "Pass the licensure exam, apply to DA programs, seed companies, or LGU agricultural offices.",
+        progression: ["Junior Agriculturist", "Agriculturist", "Senior Agriculturist", "Technical Manager", "Agricultural Consultant"],
+        salary: { entry: "₱20,000 – ₱30,000", mid: "₱32,000 – ₱55,000" },
+        key_skills: {
+          hard: ["Soil analysis", "Crop science", "Fertilizer management", "Field trials", "GIS mapping"],
+          soft: ["Analytical thinking", "Communication", "Patience", "Community engagement"]
+        },
+        market_tags: { in_demand: true, remote_friendly: false, fresh_grad_friendly: true }
+      }
+    ]
+  },
+  {
+    name: "Fisheries and Aquaculture",
+    subtitle: "The Blue Economy",
+    description: "The Philippines is one of the world's top fish producers. This department covers aquaculture operations, fishery management, and seafood processing across the archipelago.",
+    teams: [
+      {
+        name: "Aquaculture Technician / Fisheries Officer",
+        desc: "Manages fish/shrimp pond operations, water quality, feeding, and harvest cycles for commercial aquaculture or government fishery programs.",
+        typical_employers: ["BFAR", "Alsons Aquaculture", "Santeh Feeds", "Frabelle Fishing Corp", "Tateh"],
+        work_setup: "Field-based / On-site",
+        education: "BS Fisheries or BS Marine Biology. PRC Fisheries Professional license for some roles.",
+        pathway: "Pass the fisheries licensure exam, apply to BFAR programs or commercial aquaculture firms.",
+        progression: ["Aquaculture Technician", "Fisheries Officer", "Hatchery Manager", "Aquaculture Operations Manager"],
+        salary: { entry: "₱16,000 – ₱25,000", mid: "₱28,000 – ₱48,000" },
+        key_skills: {
+          hard: ["Water quality management", "Hatchery operations", "Fish nutrition", "Disease control", "Pond engineering"],
+          soft: ["Attention to detail", "Resilience", "Practical problem-solving", "Reliability"]
+        },
+        market_tags: { in_demand: true, remote_friendly: false, fresh_grad_friendly: true }
+      }
+    ]
+  }
+];
+
+// ============================================================
+// TOURISM & HOSPITALITY
+// PSA April 2026: Accommodation & Food Service = fastest-growing
+// sub-sector, +510K jobs year-on-year
+// ============================================================
+export const tourismDepartments: Department[] = [
+  {
+    name: "Hotel and Accommodation",
+    subtitle: "The Hosts",
+    description: "The fastest-growing employment sector in the Philippines. This department runs the hotels, resorts, and accommodations driving the country's tourism rebound across Boracay, Cebu, Palawan, and Metro Manila.",
+    teams: [
+      {
+        name: "Hotel Operations / Front Office Staff",
+        desc: "Manages guest check-in/out, reservations, and front-desk service in hotels and resorts. The face of Philippine hospitality.",
+        typical_employers: ["Shangri-La", "Okada Manila", "Solaire", "Megaworld Hotels", "Ayala Hotels", "Henann Resorts"],
+        work_setup: "On-site",
+        education: "BS Hospitality Management, Tourism, or HRM. TESDA NCII certifications accepted.",
+        pathway: "Complete OJT/internship at hotels (required in HM courses), then apply via hotel career pages or Kalibrr.",
+        progression: ["Front Office Associate", "Front Office Supervisor", "Duty Manager", "Front Office Manager", "Hotel Manager"],
+        salary: { entry: "₱14,000 – ₱22,000", mid: "₱28,000 – ₱50,000" },
+        key_skills: {
+          hard: ["PMS (Opera/Cloudbeds)", "Reservations systems", "Guest relations", "Upselling", "Cash handling"],
+          soft: ["Customer service", "Composure", "Communication", "Multitasking"]
+        },
+        market_tags: { in_demand: true, remote_friendly: false, fresh_grad_friendly: true }
+      },
+      {
+        name: "Travel and Tour Coordinator",
+        desc: "Plans and coordinates tour packages, bookings, and itineraries for local and inbound tourists. Strong growth as PH tourism recovers.",
+        typical_employers: ["Klook", "Rakso Travel", "Pan Pacific Travel", "DOT-accredited agencies", "Airbnb hosts"],
+        work_setup: "Hybrid / On-site",
+        education: "BS Tourism or Travel Management. DOT accreditation knowledge an advantage.",
+        pathway: "Intern with travel agencies, build knowledge of PH destinations, apply via JobStreet or travel firm pages.",
+        progression: ["Tour Coordinator", "Travel Consultant", "Operations Supervisor", "Tourism Manager", "Agency Owner"],
+        salary: { entry: "₱15,000 – ₱24,000", mid: "₱28,000 – ₱45,000" },
+        key_skills: {
+          hard: ["Itinerary planning", "GDS (Amadeus/Sabre)", "Booking systems", "Destination knowledge", "Costing"],
+          soft: ["Communication", "Organization", "Sales orientation", "Cultural awareness"]
+        },
+        market_tags: { in_demand: true, remote_friendly: true, fresh_grad_friendly: true }
+      }
+    ]
+  },
+  {
+    name: "Food Service and Culinary",
+    subtitle: "The Kitchen",
+    description: "Restaurants, cafes, and food chains form a massive employment base. This department covers culinary roles and food-service operations across the Philippines' booming dining scene.",
+    teams: [
+      {
+        name: "Chef / Culinary Professional",
+        desc: "Prepares dishes, manages kitchen stations, and ensures food quality and safety in restaurants, hotels, and food chains.",
+        typical_employers: ["Jollibee Foods Corp", "Max's Group", "Shakey's", "hotel restaurants", "cloud kitchens"],
+        work_setup: "On-site",
+        education: "BS HRM, Culinary Arts diploma, or TESDA Cookery NCII–NCIII.",
+        pathway: "Train in culinary schools (ISCAHM, CCA), build kitchen experience through apprenticeships, then move up stations.",
+        progression: ["Commis Cook", "Chef de Partie", "Sous Chef", "Head Chef", "Executive Chef"],
+        salary: { entry: "₱14,000 – ₱22,000", mid: "₱30,000 – ₱60,000" },
+        key_skills: {
+          hard: ["Food preparation", "Menu costing", "Food safety (HACCP)", "Kitchen management", "Plating"],
+          soft: ["Creativity", "Stamina", "Teamwork", "Composure under pressure"]
+        },
+        market_tags: { in_demand: true, remote_friendly: false, fresh_grad_friendly: true }
+      }
+    ]
+  }
+];
+
+// ============================================================
+// BPO & BUSINESS SERVICES (IT-BPM)
+// PSA: Admin & Support Services among top job-adding sub-sectors
+// (+572K Feb 2026). The iconic PH white-collar employer.
+// ============================================================
+export const bpoDepartments: Department[] = [
+  {
+    name: "Customer Experience and Contact Center",
+    subtitle: "The Voice of the World",
+    description: "The Philippines is the world's call-center capital. This department covers the customer-facing roles — voice, chat, and email support — that employ over a million Filipinos serving global clients.",
+    teams: [
+      {
+        name: "Customer Service Representative (CSR)",
+        desc: "Handles inbound/outbound customer interactions via voice, chat, or email for global accounts (telecom, retail, finance, tech).",
+        typical_employers: ["Concentrix", "Teleperformance", "Accenture", "TaskUs", "Alorica", "Sutherland"],
+        work_setup: "On-site / Hybrid",
+        education: "Senior High School graduate or college level. Strong English communication is the key requirement.",
+        pathway: "Apply directly to BPO hiring hubs or walk-in centers. Most offer paid training for fresh hires.",
+        progression: ["CSR", "Senior CSR", "Subject Matter Expert", "Team Leader", "Operations Manager"],
+        salary: { entry: "₱18,000 – ₱28,000", mid: "₱30,000 – ₱50,000" },
+        key_skills: {
+          hard: ["CRM tools (Salesforce/Zendesk)", "Ticketing systems", "Typing speed", "Product knowledge", "Call handling"],
+          soft: ["English fluency", "Empathy", "Patience", "Active listening"]
+        },
+        market_tags: { in_demand: true, remote_friendly: true, fresh_grad_friendly: true }
+      }
+    ]
+  },
+  {
+    name: "Knowledge Process and Back Office",
+    subtitle: "The Global Back Office",
+    description: "Higher-value BPO work — finance, HR, analytics, and technical support outsourced to PH talent. This is where the industry is moving as it climbs the value chain.",
+    teams: [
+      {
+        name: "Back Office / Shared Services Associate",
+        desc: "Handles finance, accounting, HR, or data operations for offshore clients in Global In-House Centers (GICs) and KPOs.",
+        typical_employers: ["JPMorgan Chase", "Manulife", "Wells Fargo", "Shell Business Operations", "P&G GBS", "Maersk"],
+        work_setup: "Hybrid / On-site",
+        education: "Bachelor's degree in Accountancy, Finance, HR, Business, or related field.",
+        pathway: "Apply to GICs/shared-services centers via LinkedIn or Kalibrr. Internships in shared services help.",
+        progression: ["Process Associate", "Senior Associate", "Subject Matter Expert", "Team Lead", "Process Manager"],
+        salary: { entry: "₱22,000 – ₱35,000", mid: "₱40,000 – ₱70,000" },
+        key_skills: {
+          hard: ["ERP (SAP/Oracle)", "Advanced Excel", "Process documentation", "Data analysis", "Reconciliation"],
+          soft: ["Analytical thinking", "Accuracy", "Adaptability", "Cross-cultural communication"]
+        },
+        market_tags: { in_demand: true, remote_friendly: true, fresh_grad_friendly: true }
+      }
+    ]
+  }
+];
