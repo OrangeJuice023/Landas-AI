@@ -19,7 +19,6 @@ export async function fetchCareerAdvice(
   });
 
   if (error) {
-    // Pull the real message (e.g. rate-limit text) out of the function's response
     let message = "AI request failed. Please try again.";
     try {
       const errBody = await error.context?.json();
