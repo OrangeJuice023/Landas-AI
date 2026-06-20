@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
-import { LogIn, LogOut, Mail, X, Loader2, CheckCircle2, Github } from "lucide-react";
+import { LogIn, LogOut, Mail, X, Loader2, CheckCircle2 } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
 
 export function AccountButton() {
@@ -147,7 +147,10 @@ function AuthModal({ onClose }: { onClose: () => void }) {
               onClick={() => oauthSignIn("github")}
               className="w-full py-3.5 bg-white border border-gray-200 text-gray-800 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 hover:border-black transition-all mb-4"
             >
-              <Github size={16} /> Continue with GitHub
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02.8-.22 1.65-.33 2.5-.34.85 0 1.7.12 2.5.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z" />
+              </svg>
+              Continue with GitHub
             </button>
 
             <div className="flex items-center gap-3 mb-4">
@@ -170,15 +173,15 @@ function AuthModal({ onClose }: { onClose: () => void }) {
                 disabled={status === "sending" || !email.trim()}
                 className="w-full py-3.5 bg-white border border-gray-200 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 hover:border-black transition-all disabled:opacity-50"
               >
-                {status === "sending"
-                  ? <><Loader2 size={15} className="animate-spin" /> Sending link...</>
-                  : <><Mail size={15} /> Email me a magic link</>}
+                {status === "sending" ? (
+                  <span className="flex items-center gap-2"><Loader2 size={15} className="animate-spin" /> Sending link...</span>
+                ) : (
+                  <span className="flex items-center gap-2"><Mail size={15} /> Email me a magic link</span>
+                )}
               </button>
             </div>
 
-            {errorMsg && (
-              <p className="mt-4 text-xs text-amber-600 text-center font-medium">{errorMsg}</p>
-            )}
+            {errorMsg ? <p className="mt-4 text-xs text-amber-600 text-center font-medium">{errorMsg}</p> : null}
           </>
         )}
       </div>
