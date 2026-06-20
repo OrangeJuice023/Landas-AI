@@ -27,9 +27,15 @@ export function LiveJobs({ roleTitle }: { roleTitle: string }) {
           disabled={loading}
           className="w-full py-3.5 bg-white border border-gray-200 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 hover:border-blue-300 hover:text-blue-600 transition-all disabled:opacity-60"
         >
-          {loading
-            ? <><Loader2 size={16} className="animate-spin" /> Scanning the PH job market...</>
-            : <><Radar size={16} /> View live PH openings</>}
+          {loading ? (
+            <span className="flex items-center gap-2">
+              <Loader2 size={16} className="animate-spin" /> Scanning the PH job market...
+            </span>
+          ) : (
+            <span className="flex items-center gap-2">
+              <Radar size={16} /> View live PH openings
+            </span>
+          )}
         </button>
         {error && <p className="mt-2 text-xs text-amber-600 text-center font-medium">{error}</p>}
       </div>
