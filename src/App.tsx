@@ -10,8 +10,8 @@ import type { CareerRecommendation, Recommendation } from "./types/career";
 import { fetchCareerAdvice, type DetailedSearchParams } from "./api/aiClient";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { technologyDepartments, healthcareDepartments, financeDepartments, logisticsDepartments, manufacturingDepartments, constructionDepartments, foodBeverageDepartments, retailDepartments, energyDepartments, mediaDepartments, governmentDepartments, fallbackDepartments, type Department } from "./data/industryData";
 import { savePath, getSavedPaths, type SavedPath } from "./api/supabaseApi";
+import { technologyDepartments, healthcareDepartments, financeDepartments, logisticsDepartments, manufacturingDepartments, constructionDepartments, foodBeverageDepartments, retailDepartments, energyDepartments, mediaDepartments, governmentDepartments, agricultureDepartments, tourismDepartments, bpoDepartments, fallbackDepartments, type Department } from "./data/industryData";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -19,13 +19,16 @@ function cn(...inputs: ClassValue[]) {
 
 const industriesList: { name: string; icon: LucideIcon }[] = [
   { name: "Technology", icon: Cpu },
+  { name: "BPO & Business Services", icon: Headphones },
+  { name: "Retail & Trade", icon: ShoppingBag },
+  { name: "Tourism & Hospitality", icon: Plane },
   { name: "Healthcare", icon: HeartPulse },
   { name: "Finance & Banking", icon: Banknote },
+  { name: "Agriculture & Fisheries", icon: Sprout },
   { name: "Logistics", icon: Truck },
   { name: "Manufacturing", icon: Factory },
   { name: "Construction", icon: HardHat },
   { name: "Food & Beverage", icon: UtensilsCrossed },
-  { name: "Retail & E-Commerce", icon: ShoppingBag },
   { name: "Energy", icon: Zap },
   { name: "Media", icon: Clapperboard },
   { name: "Government", icon: Landmark },
@@ -59,6 +62,10 @@ export default function App() {
   if (selectedIndustry === "Energy") displayDepartments = energyDepartments;
   if (selectedIndustry === "Media") displayDepartments = mediaDepartments;
   if (selectedIndustry === "Government") displayDepartments = governmentDepartments;
+  if (selectedIndustry === "BPO & Business Services") displayDepartments = bpoDepartments;
+  if (selectedIndustry === "Tourism & Hospitality") displayDepartments = tourismDepartments;
+  if (selectedIndustry === "Agriculture & Fisheries") displayDepartments = agricultureDepartments;
+  if (selectedIndustry === "Retail & Trade") displayDepartments = retailDepartments;
 
   const handleSearch = async () => {
     const hasDetailed = Object.values(detailedFields).some(val => val && val.trim());
