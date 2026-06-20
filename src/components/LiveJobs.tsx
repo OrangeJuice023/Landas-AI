@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Radar, ExternalLink, MapPin, Loader2, Building2 } from "lucide-react";
+import { Radar, ExternalLink, MapPin, Building2 } from "lucide-react";
 import { fetchLiveJobs, type LiveJob } from "../api/jobsClient";
 
 export function LiveJobs({ roleTitle }: { roleTitle: string }) {
@@ -19,6 +19,10 @@ export function LiveJobs({ roleTitle }: { roleTitle: string }) {
     } finally {
       setLoading(false);
     }
+  };
+
+  const openLink = (url: string) => {
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   if (jobs === null) {
@@ -53,12 +57,10 @@ export function LiveJobs({ roleTitle }: { roleTitle: string }) {
       </h4>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
         {jobs.map((job, i) => (
-          
+          <div
             key={i}
-            href={job.apply_link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group p-4 bg-white border border-gray-100 rounded-2xl hover:border-blue-200 hover:shadow-md transition-all flex flex-col gap-2"
+            onClick={() => openLink(job.apply_link)}
+            className="group p-4 bg-white border border-gray-100 rounded-2xl hover:border-blue-200 hover:shadow-md transition-all flex flex-col gap-2 cursor-pointer"
           >
             <div className="flex items-start justify-between gap-2">
               <span className="text-sm font-bold leading-snug line-clamp-2">{job.title}</span>
@@ -77,7 +79,7 @@ export function LiveJobs({ roleTitle }: { roleTitle: string }) {
               {job.employment_type ? <span className="px-2 py-0.5 bg-gray-50 text-gray-500 text-[10px] font-bold rounded-md uppercase">{job.employment_type}</span> : null}
               {job.posted_at ? <span className="text-[10px] text-gray-300 font-medium">{new Date(job.posted_at).toLocaleDateString()}</span> : null}
             </div>
-          </a>
+          </div>
         ))}
       </div>
     </div>
