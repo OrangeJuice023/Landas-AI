@@ -476,25 +476,32 @@ function RecommendationSection({ rec }: { rec: Recommendation }) {
                     </div>
                   </div>
                 </div>
-                <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col md:flex-row md:items-center gap-6">
-                  <div className="flex -space-x-2">
-                    {role.tools.map((tool, idx) => (
-                      <div key={idx} className="px-3 py-1 bg-white border border-gray-100 rounded-full text-[10px] font-bold shadow-sm">{tool}</div>
-                    ))}
+
+                <div className="mt-8 pt-6 border-t border-gray-100 space-y-6">
+                  <div>
+                    <h4 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-3">
+                      <Layers size={14} /> Tools
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {role.tools.map((tool, idx) => (
+                        <span key={idx} className="px-3 py-1.5 bg-white border border-gray-100 rounded-lg text-[10px] font-bold shadow-sm">{tool}</span>
+                      ))}
+                    </div>
                   </div>
-                  <div className="flex-1 overflow-x-auto">
-                    <div className="flex items-center gap-4">
-                      <span className="whitespace-nowrap flex items-center gap-1.5 text-xs font-bold text-gray-300 uppercase">
-                        <Layers size={14} /> Projects:
-                      </span>
+                  <div>
+                    <h4 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-3">
+                      <Layers size={14} /> Starter Projects
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
                       {role.starter_projects.map((proj, idx) => (
-                        <span key={idx} className="whitespace-nowrap text-xs font-medium text-gray-500 bg-gray-100/50 px-3 py-1.5 rounded-xl hover:bg-black hover:text-white transition-colors cursor-default">
+                        <span key={idx} className="text-xs font-medium text-gray-600 bg-gray-100/60 px-3 py-1.5 rounded-xl hover:bg-black hover:text-white transition-colors cursor-default">
                           {proj}
                         </span>
                       ))}
                     </div>
                   </div>
                 </div>
+
                 <LiveJobs roleTitle={role.title} />
               </motion.div>
             ))}
