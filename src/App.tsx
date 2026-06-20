@@ -140,7 +140,7 @@ export default function App() {
         {view === "home" && (
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center">
             <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-3">
-              Discover your future,<br className="md:hidden" /> <span className="text-blue-600">not just a job.</span>
+              Discover your future, <span className="text-blue-600">not just a job.</span>
             </h2>
             <p className="text-gray-500 max-w-xl mx-auto mb-8 font-medium">
               Philippine labor market intelligence — careers, salaries, skills, and live openings, all in one map.
