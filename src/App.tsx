@@ -140,19 +140,13 @@ export default function App() {
                   view === "suggestions" ? "bg-black text-white shadow-md" : "text-gray-500 hover:text-black hover:bg-black/5")}>
                 Suggestions
               </button>
-            </div>
-            <AccountButton />
-            <button onClick={() => { setView("suggestions"); loadSavedPaths(); }}
-                className={cn("text-sm font-bold px-4 py-1.5 rounded-full transition-all duration-300",
-                  view === "suggestions" ? "bg-black text-white shadow-md" : "text-gray-500 hover:text-black hover:bg-black/5")}>
-                Suggestions
-              </button>
               <button onClick={() => { setView("simulator"); }}
                 className={cn("text-sm font-bold px-4 py-1.5 rounded-full transition-all duration-300",
                   view === "simulator" ? "bg-black text-white shadow-md" : "text-gray-500 hover:text-black hover:bg-black/5")}>
                 Simulator
               </button>
             </div>
+            <AccountButton />
           </div>
         </header>
 
