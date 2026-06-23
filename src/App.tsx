@@ -115,7 +115,9 @@ export default function App() {
 
       <div className="relative max-w-5xl mx-auto px-6 py-12">
         <header className="flex justify-between items-center mb-12">
-          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2.5">
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
+            onClick={() => { setResult(null); setView("home"); }}
+            className="flex items-center gap-2.5 cursor-pointer">
             <LandasLogo size={40} />
             <div>
               <h1 className="text-2xl font-bold tracking-tight">Landas AI</h1>
@@ -156,15 +158,21 @@ export default function App() {
         </header>
 
         {view === "home" && (
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center">
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-3">
-              Discover your future, <span className="text-blue-600">not just a job.</span>
-            </h2>
-            <p className="text-gray-500 max-w-xl mx-auto mb-8 font-medium">
-              Philippine labor market intelligence — careers, salaries, skills, and live openings, all in one map.
-            </p>
-            <div className="bg-white border border-gray-100 rounded-[32px] shadow-[0_20px_50px_-25px_rgba(0,0,0,0.15)] p-4 md:p-6">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="relative mb-12">
+            {/* ambient network background */}
+            <div className="absolute inset-x-0 -top-10 h-[440px] overflow-hidden pointer-events-none [mask-image:radial-gradient(ellipse_60%_60%_at_50%_45%,black,transparent)]">
               <HeroNetwork />
+            </div>
+            {/* hero text floating over it */}
+            <div className="relative text-center pt-20 pb-24">
+              <motion.h2 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+                className="text-4xl md:text-6xl font-black tracking-tight mb-4">
+                Discover your future,<br /><span className="text-blue-600">not just a job.</span>
+              </motion.h2>
+              <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
+                className="text-gray-500 max-w-xl mx-auto font-medium">
+                Philippine labor market intelligence — careers, salaries, skills, and live openings, all in one map.
+              </motion.p>
             </div>
           </motion.div>
         )}
