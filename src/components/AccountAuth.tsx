@@ -176,7 +176,7 @@ function AuthModal({ onClose }: { onClose: () => void }) {
                 {status === "sending" ? (
                   <span className="flex items-center gap-2"><Loader2 size={15} className="animate-spin" /> Sending link...</span>
                 ) : (
-                  <span className="flex items-center gap-2"><Mail size={15} /> Email me a magic link</span>
+                  <span className="flex items-center gap-2"><Mail size={15} /> Email me a sign-in link</span>
                 )}
               </button>
             </div>
