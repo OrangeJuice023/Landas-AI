@@ -140,19 +140,19 @@ export default function App() {
               <button onClick={() => { setView("suggestions"); loadSavedPaths(); }}
                 className={cn("text-sm font-bold px-4 py-1.5 rounded-full transition-all duration-300",
                   view === "suggestions" ? "bg-black text-white shadow-md" : "text-gray-500 hover:text-black hover:bg-black/5")}>
-                Suggestions
+                Saved
               </button>
               <button onClick={() => { setView("simulator"); }}
                 className={cn("text-sm font-bold px-4 py-1.5 rounded-full transition-all duration-300",
                   view === "simulator" ? "bg-black text-white shadow-md" : "text-gray-500 hover:text-black hover:bg-black/5")}>
                 Simulator
               </button>
-            </div>
               <button onClick={() => { setView("graph"); }}
                 className={cn("text-sm font-bold px-4 py-1.5 rounded-full transition-all duration-300",
                   view === "graph" ? "bg-black text-white shadow-md" : "text-gray-500 hover:text-black hover:bg-black/5")}>
                 Graph
               </button>
+            </div>
             <AccountButton />
           </div>
         </header>
