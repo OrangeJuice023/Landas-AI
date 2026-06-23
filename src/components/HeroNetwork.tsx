@@ -1,57 +1,90 @@
 import { motion } from "framer-motion";
 
-interface Node { id: string; label: string; x: number; y: number; r: number; accent?: boolean; }
+interface Node { id: string; label: string; x: number; y: number; r: number; tier: 0 | 1 | 2; }
 
+// A denser, crossing network — multiple origins converging toward senior roles
 const nodes: Node[] = [
-  { id: "you", label: "You", x: 70, y: 150, r: 22, accent: true },
-  { id: "skills", label: "Skills", x: 185, y: 62, r: 15 },
-  { id: "univ", label: "University", x: 185, y: 238, r: 15 },
-  { id: "analyst", label: "Data Analyst", x: 340, y: 150, r: 18 },
-  { id: "company", label: "Companies", x: 495, y: 235, r: 15 },
-  { id: "engineer", label: "Data Engineer", x: 495, y: 85, r: 18 },
-  { id: "architect", label: "Analytics Architect", x: 648, y: 150, r: 21, accent: true },
+  { id: "student", label: "Student", x: 60, y: 230, r: 16, tier: 0 },
+  { id: "grad", label: "Fresh Grad", x: 80, y: 90, r: 14, tier: 0 },
+  { id: "shifter", label: "Career Shifter", x: 70, y: 370, r: 14, tier: 0 },
+
+  { id: "analyst", label: "Data Analyst", x: 320, y: 130, r: 16, tier: 1 },
+  { id: "dev", label: "Developer", x: 300, y: 300, r: 16, tier: 1 },
+  { id: "support", label: "Specialist", x: 340, y: 420, r: 13, tier: 1 },
+
+  { id: "engineer", label: "Data Engineer", x: 600, y: 80, r: 16, tier: 2 },
+  { id: "ml", label: "ML Engineer", x: 620, y: 220, r: 15, tier: 2 },
+  { id: "lead", label: "Tech Lead", x: 580, y: 350, r: 15, tier: 2 },
+  { id: "pm", label: "Product Mgr", x: 610, y: 460, r: 14, tier: 2 },
+
+  { id: "architect", label: "Analytics Architect", x: 900, y: 160, r: 19, tier: 2 },
+  { id: "cto", label: "Head of Data", x: 910, y: 360, r: 18, tier: 2 },
 ];
 
 const edges: [string, string][] = [
-  ["you", "skills"], ["you", "univ"], ["skills", "analyst"], ["univ", "analyst"],
-  ["analyst", "company"], ["company", "architect"], ["analyst", "engineer"], ["engineer", "architect"],
+  ["grad", "analyst"], ["student", "analyst"], ["student", "dev"], ["shifter", "dev"], ["shifter", "support"],
+  ["analyst", "engineer"], ["analyst", "ml"], ["dev", "ml"], ["dev", "lead"], ["support", "pm"], ["support", "lead"],
+  ["engineer", "architect"], ["ml", "architect"], ["ml", "cto"], ["lead", "cto"], ["pm", "cto"], ["engineer", "cto"],
 ];
 
-const careerPath = "M70 150 L340 150 L495 85 L648 150";
+// Several highlighted journeys that animate
+const journeys = [
+  "M60 230 L320 130 L600 80 L900 160",   // student → analyst → engineer → architect
+  "M70 370 L300 300 L620 220 L900 160",  // shifter → dev → ml → architect
+  "M80 90 L320 130 L620 220 L910 360",   // grad → analyst → ml → head of data
+];
+
 const byId = (id: string) => nodes.find((n) => n.id === id)!;
 
 export function HeroNetwork() {
   return (
-    <svg viewBox="0 0 720 300" className="w-full h-auto" role="img" aria-label="Animated career network">
+    <svg viewBox="0 0 980 520" className="w-full h-full" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      {/* faint base connections */}
       {edges.map(([a, b], i) => {
         const na = byId(a); const nb = byId(b);
         return (
           <motion.line key={i} x1={na.x} y1={na.y} x2={nb.x} y2={nb.y}
-            stroke="#E5E7EB" strokeWidth="1.5" strokeDasharray="4 5"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 + i * 0.08, duration: 0.6 }} />
+            stroke="#CBD5E1" strokeWidth="1" strokeDasharray="3 6"
+            initial={{ opacity: 0 }} animate={{ opacity: 0.5 }}
+            transition={{ delay: 0.2 + i * 0.04, duration: 0.8 }} />
         );
       })}
-      <motion.path d={careerPath} stroke="#3B82F6" strokeWidth="2.5" strokeLinecap="round" fill="none"
-        initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 0.85 }}
-        transition={{ delay: 0.8, duration: 1.6, ease: "easeInOut" }} />
-      <circle r="4" fill="#3B82F6"><animateMotion dur="5s" repeatCount="indefinite" path={careerPath} /></circle>
-      <circle r="2.5" fill="#93C5FD"><animateMotion dur="5s" begin="2.2s" repeatCount="indefinite" path={careerPath} /></circle>
-      {nodes.map((n, i) => (
-        <motion.g key={n.id}
-          initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.15 + i * 0.1, type: "spring", stiffness: 200, damping: 18 }}
-          style={{ transformOrigin: `${n.x}px ${n.y}px` }}>
-          {n.accent && (
-            <circle cx={n.x} cy={n.y} r={n.r + 6} fill="#3B82F6" opacity="0.1">
-              <animate attributeName="r" values={`${n.r + 4};${n.r + 10};${n.r + 4}`} dur="3s" repeatCount="indefinite" />
-            </circle>
-          )}
-          <circle cx={n.x} cy={n.y} r={n.r} fill={n.accent ? "#0A0A0A" : "white"} stroke={n.accent ? "#0A0A0A" : "#E5E7EB"} strokeWidth="2" />
-          <circle cx={n.x} cy={n.y} r="3" fill={n.accent ? "#3B82F6" : "#9CA3AF"} />
-          <text x={n.x} y={n.y + n.r + 16} textAnchor="middle" fontSize="11" fontWeight="700" fill={n.accent ? "#0A0A0A" : "#6B7280"} fontFamily="inherit">{n.label}</text>
-        </motion.g>
+
+      {/* highlighted journeys */}
+      {journeys.map((d, i) => (
+        <motion.path key={i} d={d} fill="none" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"
+          initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 0.55 }}
+          transition={{ delay: 0.6 + i * 0.4, duration: 1.8, ease: "easeInOut" }} />
       ))}
+
+      {/* traveling pulses on each journey */}
+      {journeys.map((d, i) => (
+        <circle key={`p${i}`} r={i === 0 ? 4 : 3} fill={i === 0 ? "#2563EB" : "#93C5FD"}>
+          <animateMotion dur={`${6 + i}s`} begin={`${i * 1.5}s`} repeatCount="indefinite" path={d} />
+        </circle>
+      ))}
+
+      {/* nodes */}
+      {nodes.map((n, i) => {
+        const isHub = n.tier === 2 && n.r >= 18;
+        return (
+          <motion.g key={n.id}
+            initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.1 + i * 0.06, type: "spring", stiffness: 180, damping: 16 }}
+            style={{ transformOrigin: `${n.x}px ${n.y}px` }}>
+            {isHub && (
+              <circle cx={n.x} cy={n.y} r={n.r + 6} fill="#3B82F6" opacity="0.12">
+                <animate attributeName="r" values={`${n.r + 4};${n.r + 11};${n.r + 4}`} dur="3.5s" repeatCount="indefinite" />
+              </circle>
+            )}
+            <circle cx={n.x} cy={n.y} r={n.r}
+              fill={isHub ? "#0A0A0A" : "#fff"} stroke={isHub ? "#0A0A0A" : "#CBD5E1"} strokeWidth="1.5" />
+            <circle cx={n.x} cy={n.y} r="2.5" fill={isHub ? "#3B82F6" : "#94A3B8"} />
+            <text x={n.x} y={n.y + n.r + 13} textAnchor="middle" fontSize="10" fontWeight="600"
+              fill={isHub ? "#0A0A0A" : "#94A3B8"} fontFamily="inherit">{n.label}</text>
+          </motion.g>
+        );
+      })}
     </svg>
   );
 }
