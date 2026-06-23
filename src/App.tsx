@@ -4,16 +4,17 @@ import { LiveJobs } from "./components/LiveJobs";
 import { AccountButton } from "./components/AccountAuth";
 import { LandasLogo } from "./components/LandasLogo";
 import { HeroNetwork } from "./components/HeroNetwork";
+import { CareerSimulator } from "./components/CareerSimulator";
+import { KnowledgeGraph } from "./components/KnowledgeGraph";
+import { Footer } from "./components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, Compass, Briefcase, Zap, Layout, Database, BookOpen, Layers, AlertTriangle, Cpu, HeartPulse, Banknote, Truck, Factory, HardHat, UtensilsCrossed, ShoppingBag, Clapperboard, Landmark, Sprout, Plane, Headphones, type LucideIcon } from "lucide-react";import type { CareerRecommendation, Recommendation } from "./types/career";
+import { ChevronLeft, Compass, Briefcase, Zap, Layout, Database, BookOpen, Layers, AlertTriangle, Cpu, HeartPulse, Banknote, Truck, Factory, HardHat, UtensilsCrossed, ShoppingBag, Clapperboard, Landmark, Sprout, Plane, Headphones, Menu, X, type LucideIcon } from "lucide-react";
+import type { CareerRecommendation, Recommendation } from "./types/career";
 import { fetchCareerAdvice, type DetailedSearchParams } from "./api/aiClient";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { savePath, getSavedPaths, type SavedPath } from "./api/supabaseApi";
 import { technologyDepartments, healthcareDepartments, financeDepartments, logisticsDepartments, manufacturingDepartments, constructionDepartments, foodBeverageDepartments, retailDepartments, energyDepartments, mediaDepartments, governmentDepartments, agricultureDepartments, tourismDepartments, bpoDepartments, fallbackDepartments, type Department } from "./data/industryData";
-import { CareerSimulator } from "./components/CareerSimulator";
-import { KnowledgeGraph } from "./components/KnowledgeGraph";
-import { Footer } from "./components/Footer";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -47,6 +48,7 @@ export default function App() {
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const [detailedFields, setDetailedFields] = useState<DetailedSearchParams>({
     industry: "", department: "", jobRole: "", salaryRange: "", skillsRequired: "", careerGrowth: ""
@@ -107,6 +109,8 @@ export default function App() {
     else if (view === "departments") setView("home");
   };
 
+  const goHome = () => { setResult(null); setView("home"); };
+
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-[#111] font-sans overflow-x-hidden selection:bg-black selection:text-white">
       <div className="fixed inset-0 pointer-events-none opacity-40">
@@ -117,7 +121,7 @@ export default function App() {
       <div className="relative max-w-5xl mx-auto px-6 py-12">
         <header className="flex justify-between items-center mb-12">
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
-            onClick={() => { setResult(null); setView("home"); }}
+            onClick={goHome}
             className="flex items-center gap-2.5 cursor-pointer">
             <LandasLogo size={40} />
             <div>
@@ -126,14 +130,16 @@ export default function App() {
             </div>
           </motion.div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {view !== "home" && view !== "suggestions" && (
-              <button onClick={handleBack} className="flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-black transition-colors">
+              <button onClick={handleBack} className="hidden sm:flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-black transition-colors">
                 <ChevronLeft size={16} /> Back
               </button>
             )}
-            <div className="flex bg-white/50 backdrop-blur-sm p-1 rounded-full border border-gray-100 shadow-sm">
-              <button onClick={() => { setResult(null); setView("home"); }}
+
+            {/* Desktop pill nav */}
+            <div className="hidden md:flex bg-white/50 backdrop-blur-sm p-1 rounded-full border border-gray-100 shadow-sm">
+              <button onClick={goHome}
                 className={cn("text-sm font-bold px-4 py-1.5 rounded-full transition-all duration-300",
                   view === "home" ? "bg-black text-white shadow-md" : "text-gray-500 hover:text-black hover:bg-black/5")}>
                 Home
@@ -154,18 +160,63 @@ export default function App() {
                 Graph
               </button>
             </div>
-            <AccountButton />
+
+            <div className="hidden md:block">
+              <AccountButton />
+            </div>
+
+            {/* Mobile hamburger */}
+            <button onClick={() => setMenuOpen(true)}
+              className="md:hidden p-2.5 bg-white border border-gray-100 rounded-xl shadow-sm">
+              <Menu size={20} />
+            </button>
           </div>
         </header>
 
+        {/* Mobile menu overlay */}
+        {menuOpen && (
+          <div className="md:hidden fixed inset-0 z-50">
+            <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" onClick={() => setMenuOpen(false)} />
+            <motion.div
+              initial={{ x: "100%" }} animate={{ x: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="absolute right-0 top-0 h-full w-72 bg-white shadow-2xl p-6 flex flex-col gap-2">
+              <div className="flex justify-between items-center mb-6">
+                <span className="font-bold text-lg">Menu</span>
+                <button onClick={() => setMenuOpen(false)} className="p-2 text-gray-400 hover:text-black">
+                  <X size={20} />
+                </button>
+              </div>
+              {[
+                { label: "Home", action: goHome },
+                { label: "Saved", action: () => { setView("suggestions"); loadSavedPaths(); } },
+                { label: "Simulator", action: () => setView("simulator") },
+                { label: "Graph", action: () => setView("graph") },
+              ].map((item) => (
+                <button key={item.label}
+                  onClick={() => { item.action(); setMenuOpen(false); }}
+                  className={cn("text-left px-4 py-3 rounded-2xl font-bold text-sm transition-all",
+                    (item.label === "Home" && view === "home") ||
+                    (item.label === "Saved" && view === "suggestions") ||
+                    (item.label === "Simulator" && view === "simulator") ||
+                    (item.label === "Graph" && view === "graph")
+                      ? "bg-black text-white" : "text-gray-600 hover:bg-gray-50")}>
+                  {item.label}
+                </button>
+              ))}
+              <div className="mt-4 pt-4 border-t border-gray-100">
+                <AccountButton />
+              </div>
+            </motion.div>
+          </div>
+        )}
+
         {view === "home" && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="relative mb-12">
-            {/* ambient network background */}
             <div className="absolute inset-x-0 -top-10 h-[440px] overflow-hidden pointer-events-none [mask-image:radial-gradient(ellipse_60%_60%_at_50%_45%,black,transparent)]">
               <HeroNetwork />
             </div>
-            {/* hero text floating over it */}
-            <div className="relative text-center pt-20 pb-24">
+            <div className="relative text-center pt-20 pb-24 [text-shadow:0_2px_20px_rgba(255,255,255,0.9)]">
               <motion.h2 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
                 className="text-4xl md:text-6xl font-black tracking-tight mb-4">
                 Discover your future,<br /><span className="text-blue-600">not just a job.</span>
@@ -412,15 +463,18 @@ export default function App() {
                 )}
               </motion.div>
             )}
+
             {view === "simulator" && (
               <CareerSimulator key="simulator" />
             )}
+
             {view === "graph" && (
               <KnowledgeGraph key="graph" />
             )}
           </AnimatePresence>
         </main>
       </div>
+
       <Footer />
     </div>
   );
