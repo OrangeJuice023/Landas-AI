@@ -12,7 +12,7 @@ import { twMerge } from "tailwind-merge";
 import { savePath, getSavedPaths, type SavedPath } from "./api/supabaseApi";
 import { technologyDepartments, healthcareDepartments, financeDepartments, logisticsDepartments, manufacturingDepartments, constructionDepartments, foodBeverageDepartments, retailDepartments, energyDepartments, mediaDepartments, governmentDepartments, agricultureDepartments, tourismDepartments, bpoDepartments, fallbackDepartments, type Department } from "./data/industryData";
 import { CareerSimulator } from "./components/CareerSimulator";
-
+import { KnowledgeGraph } from "./components/KnowledgeGraph";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -38,7 +38,7 @@ const industriesList: { name: string; icon: LucideIcon }[] = [
 export default function App() {
   const [input, setInput] = useState("");
   const [result, setResult] = useState<CareerRecommendation | null>(null);
-  const [view, setView] = useState<"home" | "departments" | "roles" | "results" | "suggestions" | "simulator">("home");
+  const [view, setView] = useState<"home" | "departments" | "roles" | "results" | "suggestions" | "simulator" | "graph">("home");
   const [loading, setLoading] = useState(false);
   const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
   const [selectedDepartment, setSelectedDepartment] = useState<Department | null>(null);
@@ -146,6 +146,11 @@ export default function App() {
                 Simulator
               </button>
             </div>
+              <button onClick={() => { setView("graph"); }}
+                className={cn("text-sm font-bold px-4 py-1.5 rounded-full transition-all duration-300",
+                  view === "graph" ? "bg-black text-white shadow-md" : "text-gray-500 hover:text-black hover:bg-black/5")}>
+                Graph
+              </button>
             <AccountButton />
           </div>
         </header>
@@ -400,6 +405,9 @@ export default function App() {
             )}
             {view === "simulator" && (
               <CareerSimulator key="simulator" />
+            )}
+            {view === "graph" && (
+              <KnowledgeGraph key="graph" />
             )}
           </AnimatePresence>
         </main>
