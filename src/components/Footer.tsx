@@ -1,8 +1,17 @@
-import { Mail } from "lucide-react";
+import { useState } from "react";
+import { Mail, Check } from "lucide-react";
 
 export function Footer() {
-  const contact = () => {
-    window.location.href = "mailto:gervicorado@yahoo.com?subject=Landas AI — Feedback";
+  const [copied, setCopied] = useState(false);
+  const email = "gervicorado@yahoo.com";
+
+  const handleContact = () => {
+    navigator.clipboard?.writeText(email).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }).catch(() => { /* clipboard unavailable, ignore */ });
+    // Also attempt to open a mail client for those who have one
+    window.open(`mailto:${email}?subject=Landas AI — Feedback`, "_blank");
   };
 
   return (
@@ -17,12 +26,15 @@ export function Footer() {
             Still in active development — feedback and suggestions welcome.
           </p>
         </div>
-        <button
-          onClick={contact}
-          className="shrink-0 inline-flex items-center gap-2 px-5 py-3 bg-black text-white rounded-2xl font-bold text-sm hover:scale-[0.98] active:scale-95 transition-all"
-        >
-          <Mail size={16} /> Get in touch
-        </button>
+        <div className="shrink-0 flex flex-col items-start md:items-end gap-2">
+          <button
+            onClick={handleContact}
+            className="inline-flex items-center gap-2 px-5 py-3 bg-black text-white rounded-2xl font-bold text-sm hover:scale-[0.98] active:scale-95 transition-all"
+          >
+            {copied ? <><Check size={16} /> Email copied!</> : <><Mail size={16} /> Get in touch</>}
+          </button>
+          <span className="text-xs text-gray-400 font-medium select-all">{email}</span>
+        </div>
       </div>
       <p className="text-center text-xs text-gray-300 mt-6">
         © {new Date().getFullYear()} Gervi Paulo Corado · Data grounded in PSA Labor Force Survey
