@@ -13,6 +13,7 @@ import { savePath, getSavedPaths, type SavedPath } from "./api/supabaseApi";
 import { technologyDepartments, healthcareDepartments, financeDepartments, logisticsDepartments, manufacturingDepartments, constructionDepartments, foodBeverageDepartments, retailDepartments, energyDepartments, mediaDepartments, governmentDepartments, agricultureDepartments, tourismDepartments, bpoDepartments, fallbackDepartments, type Department } from "./data/industryData";
 import { CareerSimulator } from "./components/CareerSimulator";
 import { KnowledgeGraph } from "./components/KnowledgeGraph";
+import { Footer } from "./components/Footer";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -420,6 +421,7 @@ export default function App() {
           </AnimatePresence>
         </main>
       </div>
+      <Footer />
     </div>
   );
 }
