@@ -400,6 +400,7 @@ export default function App() {
             )}
             {view === "simulator" && (
               <CareerSimulator key="simulator" />
+            )}
           </AnimatePresence>
         </main>
       </div>
